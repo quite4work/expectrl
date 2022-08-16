@@ -151,7 +151,7 @@ impl<S: AsyncRead + Unpin, W: Write + Unpin> AsyncRead for LoggedStream<S, W> {
 
 fn log(mut writer: impl Write, target: &str, data: &[u8]) {
     let _ = match std::str::from_utf8(data) {
-        Ok(data) => writeln!(writer, "{}", data),
+        Ok(data) => write!(writer, "{}", data),
         Err(..) => writeln!(writer, "(bytes): {:?}", data),
     };
 }
